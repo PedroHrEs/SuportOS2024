@@ -27,6 +27,7 @@ public enum PersonType {
     public void setPersonType(String personType) {
         this.personType = personType;
     }
+
     public static PersonType toEnum(Integer id){
         if(id==null) return null;
         for(PersonType x: PersonType.values()){

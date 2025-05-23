@@ -39,6 +39,7 @@ public class Technician extends Person{
 
     public Technician(){
         super();
+        addPersonType(PersonType.USER);
         addPersonType(PersonType.TECHNICIAN);
     }
 

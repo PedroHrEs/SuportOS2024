@@ -53,7 +53,7 @@ public class TechnicianDTO {
         this.email = obj.getEmail();
         this.password = obj.getPassword();
         this.createdAt = obj.getCreatedAt();
-        this.personType.stream().map(PersonType::toEnum).collect(Collectors.toSet());
+        this.personType = obj.getPersonType().stream().map(PersonType::getId).collect(Collectors.toSet());
     }
 
     public Long getId() {

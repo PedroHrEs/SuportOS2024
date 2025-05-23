@@ -25,7 +25,7 @@ public class UserDTO {
     @NotBlank(message = "O campo sobrenome não pode estar vazio")
     protected String lastName;
 
-    @NotNull
+    @NotNull(message = "O campo CPF não pode ser nulo")
     @CPF
     protected String cpf;
 
@@ -54,7 +54,7 @@ public class UserDTO {
         this.email = obj.getCpf();
         this.password = obj.getPassword();
         this.createdAt = obj.getCreatedAt();
-        this.personType.stream().map(PersonType::toEnum).collect(Collectors.toSet());
+        this.personType = obj.getPersonType().stream().map(PersonType::getId).collect(Collectors.toSet());
     }
 
     public Long getId() {

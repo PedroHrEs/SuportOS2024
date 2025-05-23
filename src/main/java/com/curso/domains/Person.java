@@ -11,12 +11,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  // Cada classe tem sua própria tabela
+@Inheritance(strategy = InheritanceType.JOINED)  // Cada classe tem sua própria tabela
 @Table(name = "person")
 public abstract class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_person")
+    @SequenceGenerator(name = "seq_person", sequenceName = "seq_person", allocationSize = 1)
     protected Long id;
     protected String firstName;
     protected String lastName;
@@ -32,7 +33,8 @@ public abstract class Person {
     protected LocalDate createdAt = LocalDate.now();
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name="perfis")
+    @CollectionTable(name="perfis", joinColumns = @JoinColumn(name = "person_id"))
+    @Column(name = "person_type")
     protected Set<Integer> personType = new HashSet<>();
 
     public Person() {addPersonType(PersonType.USER);}
