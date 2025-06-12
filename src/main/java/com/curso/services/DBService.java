@@ -7,6 +7,7 @@ import com.curso.domains.enums.OrderStatus;
 import com.curso.domains.enums.Status;
 import com.curso.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -30,6 +31,9 @@ public class DBService {
     @Autowired
     private ServiceOrderRepository osRepo;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
 
     public void initDB(){
 
@@ -52,11 +56,11 @@ public class DBService {
         produtoRepo.save(produto03);
         produtoRepo.save(produto04);
 
-        Technician tec1 = new Technician(null,"Jefferson", "Passerini", "89308024000", "jefferson.passerini@gmail.com", "123");
+        Technician tec1 = new Technician(null,"Jefferson", "Passerini", "89308024000", "jefferson.passerini@gmail.com", encoder.encode("123"));
 
-        User user01 = new User(null, "Joao", "Alberto", "02569095099", "joao.felipe@gmail.com", "123");
+        User user01 = new User(null, "Joao", "Alberto", "02569095099", "joao.alberto@gmail.com", encoder.encode("123"));
 
-        User user02 = new User(null, "Jose", "Felipe", "02569095044", "jose.felipe@gmail.com", "123");
+        User user02 = new User(null, "Jose", "Felipe", "02569095044", "jose.felipe@gmail.com", encoder.encode("123"));
 
         ServiceOrder os01 = new ServiceOrder(null, "test", "OS test", OrderPriority.HIGH, OrderStatus.OPEN, tec1, user02);
 
